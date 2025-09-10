@@ -1,0 +1,21 @@
+{
+  "functions": [
+    {
+      "instrs": [
+        {
+          "dest": "total",
+          "op": "const",
+          "type": "int",
+          "value": 24
+        },
+        {
+          "args": [
+            "total"
+          ],
+          "op": "print"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

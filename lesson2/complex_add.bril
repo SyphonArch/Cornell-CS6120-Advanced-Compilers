@@ -1,0 +1,12 @@
+@main {
+  a: int = const 5;
+  b: int = const 7;
+  c: int = const 3;
+  d: int = const 9;
+
+  ab: int = add a b;      # 5 + 7 = 12
+  cd: int = add c d;      # 3 + 9 = 12
+  total: int = add ab cd; # 12 + 12 = 24
+
+  print total;
+}
