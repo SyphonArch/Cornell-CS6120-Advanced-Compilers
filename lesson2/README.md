@@ -1,7 +1,5 @@
 # Lesson 2 – Bril Transformations and Control-Flow Analysis
 
----
-
 ## Transformation: Constant Addition Folding
 
 - **`complex_add.bril`**  
@@ -14,8 +12,6 @@
   - Eliminates dead code
 - **`complex_add_folded.json`**  
   Result of running `const_add_fold.py` on `complex_add.json`.
-
----
 
 ## Control-Flow Graph Construction
 
@@ -31,8 +27,6 @@
   JSON form of the Gray code program.
 - **`graycode_cfg.json`**  
   CFG for `graycode.json`.
-
----
 
 ## Testing with Turnt
 
