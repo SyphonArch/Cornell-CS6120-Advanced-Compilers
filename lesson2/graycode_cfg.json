@@ -1,0 +1,393 @@
+{
+  "functions": [
+    {
+      "name": "main",
+      "blocks": [
+        {
+          "name": "B0",
+          "instrs": [
+            {
+              "dest": "zero",
+              "op": "const",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "dest": "one",
+              "op": "const",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "dest": "two",
+              "op": "const",
+              "type": "int",
+              "value": 2
+            },
+            {
+              "args": [
+                "zero"
+              ],
+              "dest": "i",
+              "op": "id",
+              "type": "int"
+            }
+          ]
+        },
+        {
+          "name": "for.cond",
+          "instrs": [
+            {
+              "args": [
+                "i",
+                "n"
+              ],
+              "dest": "cond",
+              "op": "lt",
+              "type": "bool"
+            },
+            {
+              "args": [
+                "cond"
+              ],
+              "labels": [
+                "for.body",
+                "for.end"
+              ],
+              "op": "br"
+            }
+          ]
+        },
+        {
+          "name": "for.body",
+          "instrs": [
+            {
+              "args": [
+                "i",
+                "two"
+              ],
+              "dest": "half",
+              "op": "div",
+              "type": "int"
+            },
+            {
+              "args": [
+                "i",
+                "half"
+              ],
+              "dest": "g",
+              "funcs": [
+                "xor"
+              ],
+              "op": "call",
+              "type": "int"
+            },
+            {
+              "args": [
+                "g"
+              ],
+              "op": "print"
+            },
+            {
+              "args": [
+                "i",
+                "one"
+              ],
+              "dest": "next",
+              "op": "add",
+              "type": "int"
+            },
+            {
+              "args": [
+                "next"
+              ],
+              "dest": "i",
+              "op": "id",
+              "type": "int"
+            },
+            {
+              "labels": [
+                "for.cond"
+              ],
+              "op": "jmp"
+            }
+          ]
+        },
+        {
+          "name": "for.end",
+          "instrs": [
+            {
+              "dest": "done",
+              "op": "const",
+              "type": "int",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "cfg": {
+        "entry": "B0",
+        "edges": {
+          "B0": [
+            "for.cond"
+          ],
+          "for.cond": [
+            "for.body",
+            "for.end"
+          ],
+          "for.body": [
+            "for.cond"
+          ],
+          "for.end": []
+        }
+      }
+    },
+    {
+      "name": "xor",
+      "blocks": [
+        {
+          "name": "B0",
+          "instrs": [
+            {
+              "dest": "result",
+              "op": "const",
+              "type": "int",
+              "value": 0
+            },
+            {
+              "dest": "base",
+              "op": "const",
+              "type": "int",
+              "value": 1
+            },
+            {
+              "dest": "two",
+              "op": "const",
+              "type": "int",
+              "value": 2
+            },
+            {
+              "dest": "zero",
+              "op": "const",
+              "type": "int",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "loop.cond",
+          "instrs": [
+            {
+              "args": [
+                "a",
+                "zero"
+              ],
+              "dest": "more_a",
+              "op": "gt",
+              "type": "bool"
+            },
+            {
+              "args": [
+                "b",
+                "zero"
+              ],
+              "dest": "more_b",
+              "op": "gt",
+              "type": "bool"
+            },
+            {
+              "args": [
+                "more_a",
+                "more_b"
+              ],
+              "dest": "more",
+              "op": "or",
+              "type": "bool"
+            },
+            {
+              "args": [
+                "more"
+              ],
+              "labels": [
+                "loop.body",
+                "loop.end"
+              ],
+              "op": "br"
+            }
+          ]
+        },
+        {
+          "name": "loop.body",
+          "instrs": [
+            {
+              "args": [
+                "a",
+                "two"
+              ],
+              "dest": "qa",
+              "op": "div",
+              "type": "int"
+            },
+            {
+              "args": [
+                "qa",
+                "two"
+              ],
+              "dest": "double_qa",
+              "op": "mul",
+              "type": "int"
+            },
+            {
+              "args": [
+                "a",
+                "double_qa"
+              ],
+              "dest": "ra",
+              "op": "sub",
+              "type": "int"
+            },
+            {
+              "args": [
+                "b",
+                "two"
+              ],
+              "dest": "qb",
+              "op": "div",
+              "type": "int"
+            },
+            {
+              "args": [
+                "qb",
+                "two"
+              ],
+              "dest": "double_qb",
+              "op": "mul",
+              "type": "int"
+            },
+            {
+              "args": [
+                "b",
+                "double_qb"
+              ],
+              "dest": "rb",
+              "op": "sub",
+              "type": "int"
+            },
+            {
+              "args": [
+                "ra",
+                "rb"
+              ],
+              "dest": "sum",
+              "op": "add",
+              "type": "int"
+            },
+            {
+              "args": [
+                "sum",
+                "two"
+              ],
+              "dest": "half_sum",
+              "op": "div",
+              "type": "int"
+            },
+            {
+              "args": [
+                "half_sum",
+                "two"
+              ],
+              "dest": "double_half_sum",
+              "op": "mul",
+              "type": "int"
+            },
+            {
+              "args": [
+                "sum",
+                "double_half_sum"
+              ],
+              "dest": "rbit",
+              "op": "sub",
+              "type": "int"
+            },
+            {
+              "args": [
+                "rbit",
+                "base"
+              ],
+              "dest": "contrib",
+              "op": "mul",
+              "type": "int"
+            },
+            {
+              "args": [
+                "result",
+                "contrib"
+              ],
+              "dest": "result",
+              "op": "add",
+              "type": "int"
+            },
+            {
+              "args": [
+                "qa"
+              ],
+              "dest": "a",
+              "op": "id",
+              "type": "int"
+            },
+            {
+              "args": [
+                "qb"
+              ],
+              "dest": "b",
+              "op": "id",
+              "type": "int"
+            },
+            {
+              "args": [
+                "base",
+                "base"
+              ],
+              "dest": "base",
+              "op": "add",
+              "type": "int"
+            },
+            {
+              "labels": [
+                "loop.cond"
+              ],
+              "op": "jmp"
+            }
+          ]
+        },
+        {
+          "name": "loop.end",
+          "instrs": [
+            {
+              "args": [
+                "result"
+              ],
+              "op": "ret"
+            }
+          ]
+        }
+      ],
+      "cfg": {
+        "entry": "B0",
+        "edges": {
+          "B0": [
+            "loop.cond"
+          ],
+          "loop.cond": [
+            "loop.body",
+            "loop.end"
+          ],
+          "loop.body": [
+            "loop.cond"
+          ],
+          "loop.end": []
+        }
+      }
+    }
+  ]
+}

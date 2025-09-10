@@ -1,0 +1,77 @@
+{
+  "functions": [
+    {
+      "name": "main",
+      "blocks": [
+        {
+          "name": "B0",
+          "instrs": [
+            {
+              "dest": "a",
+              "op": "const",
+              "type": "int",
+              "value": 5
+            },
+            {
+              "dest": "b",
+              "op": "const",
+              "type": "int",
+              "value": 7
+            },
+            {
+              "dest": "c",
+              "op": "const",
+              "type": "int",
+              "value": 3
+            },
+            {
+              "dest": "d",
+              "op": "const",
+              "type": "int",
+              "value": 9
+            },
+            {
+              "args": [
+                "a",
+                "b"
+              ],
+              "dest": "ab",
+              "op": "add",
+              "type": "int"
+            },
+            {
+              "args": [
+                "c",
+                "d"
+              ],
+              "dest": "cd",
+              "op": "add",
+              "type": "int"
+            },
+            {
+              "args": [
+                "ab",
+                "cd"
+              ],
+              "dest": "total",
+              "op": "add",
+              "type": "int"
+            },
+            {
+              "args": [
+                "total"
+              ],
+              "op": "print"
+            }
+          ]
+        }
+      ],
+      "cfg": {
+        "entry": "B0",
+        "edges": {
+          "B0": []
+        }
+      }
+    }
+  ]
+}
