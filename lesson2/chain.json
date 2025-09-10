@@ -1,6 +1,7 @@
 {
   "functions": [
     {
+      "name": "main",
       "instrs": [
         {
           "dest": "a",
@@ -27,40 +28,39 @@
           "value": 9
         },
         {
+          "dest": "ab",
+          "op": "add",
+          "type": "int",
           "args": [
             "a",
             "b"
-          ],
-          "dest": "ab",
-          "op": "add",
-          "type": "int"
+          ]
         },
         {
+          "dest": "cd",
+          "op": "add",
+          "type": "int",
           "args": [
             "c",
             "d"
-          ],
-          "dest": "cd",
-          "op": "add",
-          "type": "int"
+          ]
         },
         {
+          "dest": "total",
+          "op": "add",
+          "type": "int",
           "args": [
             "ab",
             "cd"
-          ],
-          "dest": "total",
-          "op": "add",
-          "type": "int"
+          ]
         },
         {
+          "op": "print",
           "args": [
             "total"
-          ],
-          "op": "print"
+          ]
         }
-      ],
-      "name": "main"
+      ]
     }
   ]
 }

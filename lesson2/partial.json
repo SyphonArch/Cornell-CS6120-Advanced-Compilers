@@ -1,0 +1,44 @@
+{
+  "functions": [
+    {
+      "name": "main",
+      "instrs": [
+        {
+          "dest": "x",
+          "op": "const",
+          "type": "int",
+          "value": 4
+        },
+        {
+          "dest": "y",
+          "op": "const",
+          "type": "int",
+          "value": 10
+        },
+        {
+          "dest": "input",
+          "op": "id",
+          "type": "int",
+          "args": [
+            "x"
+          ]
+        },
+        {
+          "dest": "sum",
+          "op": "add",
+          "type": "int",
+          "args": [
+            "y",
+            "input"
+          ]
+        },
+        {
+          "op": "print",
+          "args": [
+            "sum"
+          ]
+        }
+      ]
+    }
+  ]
+}

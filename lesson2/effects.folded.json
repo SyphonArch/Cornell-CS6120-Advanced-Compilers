@@ -1,0 +1,24 @@
+{
+  "functions": [
+    {
+      "instrs": [
+        {
+          "dest": "r",
+          "op": "const",
+          "type": "int",
+          "value": 3
+        },
+        {
+          "args": [
+            "r"
+          ],
+          "op": "print"
+        },
+        {
+          "op": "ret"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

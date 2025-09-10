@@ -1,0 +1,4 @@
+command = "python3 const_add_fold.py < {filename} | jq -S ."
+
+[output]
+"folded.json" = "-"

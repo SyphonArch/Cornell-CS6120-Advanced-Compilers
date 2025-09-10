@@ -1,0 +1,39 @@
+{
+  "functions": [
+    {
+      "name": "main",
+      "instrs": [
+        {
+          "dest": "p",
+          "op": "const",
+          "type": "int",
+          "value": 1
+        },
+        {
+          "dest": "q",
+          "op": "const",
+          "type": "int",
+          "value": 2
+        },
+        {
+          "dest": "r",
+          "op": "add",
+          "type": "int",
+          "args": [
+            "p",
+            "q"
+          ]
+        },
+        {
+          "op": "print",
+          "args": [
+            "r"
+          ]
+        },
+        {
+          "op": "ret"
+        }
+      ]
+    }
+  ]
+}
