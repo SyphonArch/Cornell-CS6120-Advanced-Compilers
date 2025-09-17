@@ -118,7 +118,7 @@ def main():
     plt.xticks(rotation=90)
     plt.grid(axis="y", linestyle="--", alpha=0.5)
     plt.tight_layout()
-    plt.savefig("performance_gains.pdf")
+    plt.savefig("performance_gains.png")
 
 if __name__ == "__main__":
     main()
