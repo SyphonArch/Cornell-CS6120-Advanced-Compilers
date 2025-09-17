@@ -1,0 +1,18 @@
+@main(a: int) {
+  x: int = call @fact a;
+  print x;
+}
+@fact(a: int): int {
+  v2: int = const 0;
+  v3: bool = eq a v2;
+  br v3 .then.0 .else.0;
+.then.0:
+  v4: int = const 1;
+  ret v4;
+.else.0:
+  v7: int = const 1;
+  v8: int = sub a v7;
+  v9: int = call @fact v8;
+  v10: int = mul a v9;
+  ret v10;
+}

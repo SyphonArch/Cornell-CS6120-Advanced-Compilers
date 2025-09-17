@@ -1,0 +1,60 @@
+# ARGS: 50
+@main(n: int) {
+  v2: int = const 1;
+  i: int = id v2;
+.for.cond.1:
+  v5: bool = lt i n;
+  br v5 .for.body.1 .for.end.1;
+.for.body.1:
+  v6: int = id i;
+  isPrime: bool = call @checkPrime v6;
+  v8: bool = id isPrime;
+  br v8 .then.7 .else.7;
+.then.7:
+  v9: int = const 1;
+  print v9;
+  jmp .endif.7;
+.else.7:
+  v11: int = const 0;
+  print v11;
+.endif.7:
+  v14: int = const 1;
+  v15: int = add i v14;
+  i: int = id v15;
+  jmp .for.cond.1;
+.for.end.1:
+}
+@checkPrime(x: int): bool {
+  v2: int = const 1;
+  v3: bool = le x v2;
+  br v3 .then.0 .else.0;
+.then.0:
+  v4: bool = const false;
+  ret v4;
+.else.0:
+.endif.0:
+  v6: int = const 2;
+  i: int = id v6;
+.for.cond.5:
+  v9: bool = lt i x;
+  br v9 .for.body.5 .for.end.5;
+.for.body.5:
+  v12: int = div x i;
+  v15: int = mul i v12;
+  v17: bool = eq x v15;
+  isDivisible: bool = id v17;
+  v19: bool = id isDivisible;
+  br v19 .then.18 .else.18;
+.then.18:
+  v20: bool = const false;
+  ret v20;
+.else.18:
+.endif.18:
+  v22: int = const 1;
+  v23: int = add i v22;
+  i: int = id v23;
+  jmp .for.cond.5;
+.for.end.5:
+  v24: bool = const true;
+  ret v24;
+}

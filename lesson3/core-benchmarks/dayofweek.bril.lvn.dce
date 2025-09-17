@@ -1,0 +1,242 @@
+@main(year: int, month: int, day: int) {
+  v11: int = const 0;
+  leap: int = id v11;
+  v12: int = id year;
+  v13: int = const 400;
+  m400: int = call @modulo v12 v13;
+  v14: int = id year;
+  v15: int = const 100;
+  m100: int = call @modulo v14 v15;
+  v16: int = id year;
+  v17: int = const 4;
+  m4: int = call @modulo v16 v17;
+  v20: int = const 0;
+  v21: bool = eq v20 m400;
+  br v21 .then.18 .else.18;
+.then.18:
+  v22: int = const 1;
+  leap: int = id v22;
+  jmp .endif.18;
+.else.18:
+  v25: int = const 0;
+  v26: bool = eq m100 v25;
+  br v26 .then.23 .else.23;
+.then.23:
+  v27: int = const 0;
+  leap: int = id v27;
+  jmp .endif.23;
+.else.23:
+  v30: int = const 0;
+  v31: bool = eq m4 v30;
+  br v31 .then.28 .else.28;
+.then.28:
+  v32: int = const 1;
+  leap: int = id v32;
+  jmp .endif.28;
+.else.28:
+.endif.28:
+.endif.23:
+.endif.18:
+  v34: int = const 100;
+  v35: int = div year v34;
+  century: int = id v35;
+  v36: int = const 0;
+  centuryCode: int = id v36;
+  v38: int = const 4;
+  c: int = id v38;
+.for.cond.37:
+  v40: int = const 0;
+  v41: bool = gt c v40;
+  br v41 .for.body.37 .for.end.37;
+.for.body.37:
+  v44: int = add century c;
+  v45: int = const 4;
+  mcc: int = call @modulo v44 v45;
+  v48: int = const 0;
+  v49: bool = eq mcc v48;
+  br v49 .then.46 .else.46;
+.then.46:
+  v51: int = const 2;
+  v52: int = mul c v51;
+  v53: int = const 2;
+  v54: int = sub v52 v53;
+  centuryCode: int = id v54;
+  jmp .endif.46;
+.else.46:
+.endif.46:
+  v56: int = const 1;
+  v57: int = sub c v56;
+  c: int = id v57;
+  jmp .for.cond.37;
+.for.end.37:
+  v58: int = id year;
+  v59: int = const 100;
+  rYear: int = call @modulo v58 v59;
+  v62: int = add rYear centuryCode;
+  v64: int = const 4;
+  v65: int = div rYear v64;
+  v66: int = add v62 v65;
+  yearCode: int = id v66;
+  v67: int = const 0;
+  monthCode: int = id v67;
+  v70: int = const 1;
+  v71: bool = eq month v70;
+  br v71 .then.68 .else.68;
+.then.68:
+  v72: int = const 1;
+  monthCode: int = id v72;
+  jmp .endif.68;
+.else.68:
+  v75: int = const 2;
+  v76: bool = eq month v75;
+  br v76 .then.73 .else.73;
+.then.73:
+  v77: int = const 4;
+  monthCode: int = id v77;
+  jmp .endif.73;
+.else.73:
+  v80: int = const 3;
+  v81: bool = eq month v80;
+  br v81 .then.78 .else.78;
+.then.78:
+  v82: int = const 4;
+  monthCode: int = id v82;
+  jmp .endif.78;
+.else.78:
+  v85: int = const 4;
+  v86: bool = eq month v85;
+  br v86 .then.83 .else.83;
+.then.83:
+  v87: int = const 0;
+  monthCode: int = id v87;
+  jmp .endif.83;
+.else.83:
+  v90: int = const 5;
+  v91: bool = eq month v90;
+  br v91 .then.88 .else.88;
+.then.88:
+  v92: int = const 2;
+  monthCode: int = id v92;
+  jmp .endif.88;
+.else.88:
+  v95: int = const 6;
+  v96: bool = eq month v95;
+  br v96 .then.93 .else.93;
+.then.93:
+  v97: int = const 5;
+  monthCode: int = id v97;
+  jmp .endif.93;
+.else.93:
+  v100: int = const 7;
+  v101: bool = eq month v100;
+  br v101 .then.98 .else.98;
+.then.98:
+  v102: int = const 0;
+  monthCode: int = id v102;
+  jmp .endif.98;
+.else.98:
+  v105: int = const 8;
+  v106: bool = eq month v105;
+  br v106 .then.103 .else.103;
+.then.103:
+  v107: int = const 3;
+  monthCode: int = id v107;
+  jmp .endif.103;
+.else.103:
+  v110: int = const 9;
+  v111: bool = eq month v110;
+  br v111 .then.108 .else.108;
+.then.108:
+  v112: int = const 6;
+  monthCode: int = id v112;
+  jmp .endif.108;
+.else.108:
+  v115: int = const 10;
+  v116: bool = eq month v115;
+  br v116 .then.113 .else.113;
+.then.113:
+  v117: int = const 1;
+  monthCode: int = id v117;
+  jmp .endif.113;
+.else.113:
+  v120: int = const 11;
+  v121: bool = eq month v120;
+  br v121 .then.118 .else.118;
+.then.118:
+  v122: int = const 4;
+  monthCode: int = id v122;
+  jmp .endif.118;
+.else.118:
+  v123: int = const 6;
+  monthCode: int = id v123;
+.endif.118:
+.endif.113:
+.endif.108:
+.endif.103:
+.endif.98:
+.endif.93:
+.endif.88:
+.endif.83:
+.endif.78:
+.endif.73:
+.endif.68:
+  v126: int = add yearCode monthCode;
+  v128: int = add v126 day;
+  sum: int = id v128;
+  v129: int = const 0;
+  dayCode: int = id v129;
+  v132: int = const 1;
+  v133: bool = eq leap v132;
+  br v133 .then.130 .else.130;
+.then.130:
+  v136: int = const 1;
+  v137: bool = eq month v136;
+  br v137 .then.134 .else.134;
+.then.134:
+  v139: int = const 1;
+  v140: int = sub sum v139;
+  v141: int = const 7;
+  v142: int = call @modulo v140 v141;
+  dayCode: int = id v142;
+  jmp .endif.134;
+.else.134:
+  v145: int = const 2;
+  v146: bool = eq month v145;
+  br v146 .then.143 .else.143;
+.then.143:
+  v148: int = const 1;
+  v149: int = sub sum v148;
+  v150: int = const 7;
+  v151: int = call @modulo v149 v150;
+  dayCode: int = id v151;
+  jmp .endif.143;
+.else.143:
+  v152: int = id sum;
+  v153: int = const 7;
+  v154: int = call @modulo v152 v153;
+  dayCode: int = id v154;
+.endif.143:
+.endif.134:
+  jmp .endif.130;
+.else.130:
+  v155: int = id sum;
+  v156: int = const 7;
+  v157: int = call @modulo v155 v156;
+  dayCode: int = id v157;
+.endif.130:
+  v159: int = const 5;
+  v160: int = add dayCode v159;
+  v161: int = const 7;
+  v162: int = call @modulo v160 v161;
+  v163: int = const 1;
+  v164: int = add v163 v162;
+  dayOfWeek: int = id v164;
+  v165: int = id dayOfWeek;
+  print v165;
+}
+@modulo(a: int, b: int): int {
+  v2: int = div a b;
+  v6: int = mul b v2;
+  v7: int = sub a v6;
+  ret v7;
+}

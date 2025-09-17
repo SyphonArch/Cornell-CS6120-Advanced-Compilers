@@ -11,7 +11,7 @@ Performs:
 import sys
 import json
 
-from lesson2.build_cfg import build_cfg_for_function
+from lesson2.build_cfg_lesson3 import build_cfg_for_function
 from helpers import instr_uses, instr_def, linearize_cfg
 
 # Core operator groups
@@ -39,16 +39,16 @@ def try_const_fold(op, consts):
             if op == "sub": return True, a - b
             if op == "mul": return True, a * b
             if op == "div": return True, a // b
-            if op == "eq": return True, 1 if a == b else 0
-            if op == "lt": return True, 1 if a < b else 0
-            if op == "le": return True, 1 if a <= b else 0
-            if op == "gt": return True, 1 if a > b else 0
-            if op == "ge": return True, 1 if a >= b else 0
-            if op == "and": return True, 1 if (a and b) else 0
-            if op == "or":  return True, 1 if (a or b) else 0
+            if op == "eq": return True, a == b
+            if op == "lt": return True, a < b
+            if op == "le": return True, a <= b
+            if op == "gt": return True, a > b
+            if op == "ge": return True, a >= b
+            if op == "and": return True, a and b
+            if op == "or":  return True, a or b
         if op in UNARY_OPS:
             (a,) = consts
-            if op == "not": return True, 0 if a else 1
+            if op == "not": return True, not a
     except Exception:
         pass
     return False, None

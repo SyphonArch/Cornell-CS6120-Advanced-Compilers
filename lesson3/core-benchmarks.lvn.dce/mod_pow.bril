@@ -1,0 +1,61 @@
+# ARGS: 4 13 497
+@main(base: int, exp: int, mod: int) {
+  out: int = call @mod_pow base exp mod;
+  print out;
+}
+@mod_pow(b: int, e: int, m: int): int {
+  v2: int = const 1;
+  v3: bool = eq m v2;
+  br v3 .then.0 .else.0;
+.then.0:
+  v4: int = const 0;
+  ret v4;
+.else.0:
+  v5: int = const 1;
+  result: int = id v5;
+  v6: int = id b;
+  v7: int = id m;
+  base: int = call @mod v6 v7;
+  v9: int = id e;
+  exp: int = id v9;
+.for.cond.8:
+  v11: int = const 0;
+  v12: bool = gt exp v11;
+  br v12 .for.body.8 .for.end.8;
+.for.body.8:
+  v13: int = id exp;
+  v14: int = const 2;
+  bit: int = call @mod v13 v14;
+  v17: int = const 1;
+  v18: bool = eq bit v17;
+  br v18 .then.15 .else.15;
+.then.15:
+  v21: int = mul result base;
+  result: int = id v21;
+  v22: int = id result;
+  v23: int = id m;
+  v24: int = call @mod v22 v23;
+  result: int = id v24;
+  jmp .endif.15;
+.else.15:
+.endif.15:
+  v27: int = mul base base;
+  base: int = id v27;
+  v28: int = id base;
+  v29: int = id m;
+  v30: int = call @mod v28 v29;
+  base: int = id v30;
+  v32: int = const 2;
+  v33: int = div exp v32;
+  exp: int = id v33;
+  jmp .for.cond.8;
+.for.end.8:
+  v34: int = id result;
+  ret v34;
+}
+@mod(n: int, m: int): int {
+  v3: int = div n m;
+  v5: int = mul m v3;
+  v6: int = sub n v5;
+  ret v6;
+}

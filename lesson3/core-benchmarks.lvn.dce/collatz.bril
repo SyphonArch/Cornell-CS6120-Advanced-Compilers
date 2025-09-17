@@ -1,0 +1,26 @@
+# ARGS: 7
+@main(x: int) {
+  one: int = const 1;
+  two: int = const 2;
+  three: int = const 3;
+  jmp .print;
+.cond:
+  eq_one: bool = eq x one;
+  br eq_one .end .loop;
+.loop:
+  half: int = div x two;
+  doublehalf: int = mul two half;
+  even: bool = eq x doublehalf;
+  br even .even .odd;
+.even:
+  x: int = div x two;
+  jmp .print;
+.odd:
+  x: int = mul x three;
+  x: int = add x one;
+.print:
+  print x;
+  jmp .cond;
+.end:
+  ret;
+}

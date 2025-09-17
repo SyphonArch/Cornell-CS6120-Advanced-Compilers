@@ -1,0 +1,19 @@
+@hanoi(disks: int, src: int, dst: int, spare: int) {
+  zero: int = const 0;
+  pos: bool = gt disks zero;
+  br pos .then .else;
+.then:
+  one: int = const 1;
+  above: int = sub disks one;
+  call @hanoi above src spare dst;
+  print src dst;
+  call @hanoi above spare dst src;
+.else:
+  ret;
+}
+@main(disks: int) {
+  src: int = const 0;
+  dst: int = const 2;
+  spare: int = const 1;
+  call @hanoi disks src dst spare;
+}

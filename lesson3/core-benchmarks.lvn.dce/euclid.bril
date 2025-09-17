@@ -1,0 +1,45 @@
+@main {
+  v0: int = const 23789216;
+  x: int = id v0;
+  v1: int = const 1748698766;
+  y: int = id v1;
+  v2: int = id x;
+  v3: int = id y;
+  f: int = call @gcd v2 v3;
+  v4: int = id f;
+  print v4;
+}
+@mod(r: int, s: int): int {
+  v3: int = div r s;
+  v5: int = mul s v3;
+  v6: int = sub r v5;
+  result: int = id v6;
+  v7: int = id result;
+  ret v7;
+}
+@gcd(a: int, b: int): int {
+  v0: int = const 0;
+  zero: int = id v0;
+  v3: bool = eq v0 b;
+  v4: bool = not v3;
+  cond: bool = id v4;
+.for.cond.5:
+  v6: bool = id cond;
+  br v6 .for.body.5 .for.end.5;
+.for.body.5:
+  v7: int = id b;
+  temp: int = id v7;
+  v8: int = id a;
+  v9: int = id b;
+  v10: int = call @mod v8 v9;
+  b: int = id v10;
+  v11: int = id temp;
+  a: int = id v11;
+  v14: bool = eq v10 zero;
+  v15: bool = not v14;
+  cond: bool = id v15;
+  jmp .for.cond.5;
+.for.end.5:
+  v16: int = id a;
+  ret v16;
+}

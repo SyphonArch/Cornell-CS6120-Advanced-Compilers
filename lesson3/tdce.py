@@ -10,7 +10,7 @@ Only instructions with a `dest` are considered. Others are left as they are.
 import sys
 import json
 
-from lesson2.build_cfg import build_cfg_for_function
+from lesson2.build_cfg_lesson3 import build_cfg_for_function
 from helpers import instr_uses, instr_def, linearize_cfg, reachable_block_names
 
 def remove_globally_unused_instructions(cfg):
@@ -21,7 +21,7 @@ def remove_globally_unused_instructions(cfg):
     used = set()
     for name in reachable:
         for instruction in name_to_block[name]["instrs"]:
-            used |= instr_uses(instruction)
+            used |= set(instr_uses(instruction))
 
     changed = False
     for name in reachable:
@@ -29,7 +29,12 @@ def remove_globally_unused_instructions(cfg):
         kept = []
         for instruction in block["instrs"]:
             dest = instr_def(instruction)
+            op = instruction.get("op")
             if dest and dest not in used:
+                # Do not delete possibly side-effecting calls
+                if op == "call":
+                    kept.append(instruction)
+                    continue
                 changed = True
                 continue
             kept.append(instruction)
@@ -53,6 +58,11 @@ def remove_locally_killed_instructions(cfg):
             dest = instr_def(instr)
             uses = instr_uses(instr)
 
+            # Drop trivial self-copy (e.g., "i = id i")
+            if dest is not None and instr.get("op") == "id" and len(uses) == 1 and uses[0] == dest:
+                changed = True
+                continue
+
             if dest is None:
                 kept_rev.append(instr)
                 for u in uses:
@@ -60,18 +70,30 @@ def remove_locally_killed_instructions(cfg):
                         used_since_redef.add(u)
                 continue
 
-            # Drop if a later def overwrote it with no intervening use
-            if dest in redefined and dest not in used_since_redef:
-                changed = True
-                continue
+            was_redef = dest in redefined
+            redefined.add(dest)
 
+            # Record uses (including possible self-use)
             for u in uses:
                 if u in redefined:
                     used_since_redef.add(u)
 
+            self_use = dest in uses
+
+            # If a later def overwrote it with no intervening use, drop it…
+            if was_redef and dest not in used_since_redef:
+                # …but keep if this instruction depends on the previous value (self-use),
+                # or if it is a call (side effects).
+                if self_use or (instr.get("op") == "call"):
+                    pass
+                else:
+                    changed = True
+                    continue
+
             kept_rev.append(instr)
-            redefined.add(dest)
-            used_since_redef.discard(dest)
+
+            if not self_use:
+                used_since_redef.discard(dest)
 
         block["instrs"] = list(reversed(kept_rev))
 

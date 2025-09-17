@@ -1,0 +1,43 @@
+@main(n: int, p: int) {
+  v0: int = const 2;
+  two: int = id v0;
+  v3: int = sub p v0;
+  m: int = id v3;
+  v4: int = const 1;
+  ans: int = id v4;
+  v5: int = id n;
+  a: int = id v5;
+.for.cond.6:
+  v9: int = const 0;
+  v10: bool = gt m v9;
+  br v10 .for.body.6 .for.end.6;
+.for.body.6:
+  v15: int = div m two;
+  v17: int = mul two v15;
+  v18: bool = eq m v17;
+  br v18 .then.11 .else.11;
+.then.11:
+  jmp .endif.11;
+.else.11:
+  v21: int = mul ans a;
+  v22: int = id p;
+  v23: int = call @mod v21 v22;
+  ans: int = id v23;
+.endif.11:
+  v26: int = mul a a;
+  v27: int = id p;
+  v28: int = call @mod v26 v27;
+  a: int = id v28;
+  v31: int = div m two;
+  m: int = id v31;
+  jmp .for.cond.6;
+.for.end.6:
+  v32: int = id ans;
+  print v32;
+}
+@mod(n: int, p: int): int {
+  v3: int = div n p;
+  v5: int = mul p v3;
+  v6: int = sub n v5;
+  ret v6;
+}

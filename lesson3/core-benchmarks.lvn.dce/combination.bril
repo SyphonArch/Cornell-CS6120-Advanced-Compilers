@@ -1,0 +1,43 @@
+# ARGS: 12 3
+@main(n: int, k: int) {
+  final: int = call @combo n k;
+  print final;
+}
+@combo(n: int, k: int): int {
+  zero: int = const 0;
+  one: int = const 1;
+  nneg: bool = lt n zero;
+  kneg: bool = lt k zero;
+  eitherneg: bool = or nneg kneg;
+  br eitherneg .negatives .natural;
+.negatives:
+  ret zero;
+.natural:
+  kzero: bool = eq k zero;
+  br kzero .zeroes .positive;
+.zeroes:
+  ret one;
+.positive:
+  nltk: bool = lt n k;
+  br nltk .negatives .valid;
+.valid:
+  nfac: int = call @factorial n;
+  kfac: int = call @factorial k;
+  nmink: int = sub n k;
+  nkfac: int = call @factorial nmink;
+  comboden: int = mul kfac nkfac;
+  combo: int = div nfac comboden;
+  ret combo;
+}
+@factorial(x: int): int {
+  one: int = const 1;
+  basee: bool = eq one x;
+  br basee .base .recurs;
+.base:
+  ret one;
+.recurs:
+  oneless: int = sub x one;
+  stepback: int = call @factorial oneless;
+  fact: int = mul x stepback;
+  ret fact;
+}

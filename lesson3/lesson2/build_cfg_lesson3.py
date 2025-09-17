@@ -102,7 +102,6 @@ def block_successors(block, label_to_block, blocks, idx):
 
 
 def build_cfg_for_function(func):
-    """Build the CFG for a single function."""
     instrs = func.get("instrs", [])
     blocks, label_to_block = split_basic_blocks(instrs)
 
@@ -111,14 +110,18 @@ def build_cfg_for_function(func):
         succ_idx = block_successors(block, label_to_block, blocks, i)
         edges[block["name"]] = [blocks[j]["name"] for j in succ_idx]
 
-    return {
+    result = {
         "name": func.get("name"),
+        "args": func.get("args", []),     # <— preserve arguments
         "blocks": blocks,
         "cfg": {
             "entry": blocks[0]["name"] if blocks else None,
-            "edges": edges
-        }
+            "edges": edges,
+        },
     }
+    if "type" in func:
+        result["type"] = func.get("type")     # <— preserve type if present
+    return result
 
 def main():
     """Main function to read Bril program, build CFGs, and output them."""

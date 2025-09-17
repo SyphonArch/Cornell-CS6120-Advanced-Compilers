@@ -1,0 +1,21 @@
+@main(r: int, n: int, nn: int, t: int) {
+  tr: int = call @mod t r;
+  trnn: int = mul tr nn;
+  m: int = call @mod trnn r;
+  mn: int = mul m n;
+  tmn: int = add mn t;
+  t: int = div tmn r;
+  b: bool = ge t n;
+  br b .then .else;
+.then:
+  res: int = sub t n;
+  print res;
+.else:
+  print t;
+}
+@mod(x: int, y: int): int {
+  q: int = div x y;
+  xq: int = mul y q;
+  result: int = sub x xq;
+  ret result;
+}

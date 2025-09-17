@@ -1,0 +1,50 @@
+# ARGS: 0 10000 738
+@main(min: int, max: int, target: int) {
+  v0: int = id target;
+  target: int = id v0;
+  v1: int = id min;
+  min: int = id v1;
+  v2: int = id max;
+  max: int = id v2;
+  v3: int = id min;
+  v4: int = id max;
+  i: int = call @midpoint v3 v4;
+  v7: int = id min;
+  v8: int = id max;
+  i: int = call @midpoint v7 v8;
+.for.cond.6:
+  v11: bool = eq i target;
+  v12: bool = not v11;
+  br v12 .for.body.6 .for.end.6;
+.for.body.6:
+  v16: bool = gt i target;
+  br v16 .then.13 .else.13;
+.then.13:
+  v17: int = id i;
+  max: int = id v17;
+  jmp .endif.13;
+.else.13:
+  v21: bool = lt i target;
+  br v21 .then.18 .else.18;
+.then.18:
+  v22: int = id i;
+  min: int = id v22;
+  jmp .endif.18;
+.else.18:
+.endif.18:
+.endif.13:
+  v23: int = id min;
+  v24: int = id max;
+  v25: int = call @midpoint v23 v24;
+  i: int = id v25;
+  jmp .for.cond.6;
+.for.end.6:
+  v26: int = id i;
+  print v26;
+}
+@midpoint(min: int, max: int): int {
+  v2: int = add max min;
+  v4: int = const 2;
+  v5: int = div v2 v4;
+  ret v5;
+}

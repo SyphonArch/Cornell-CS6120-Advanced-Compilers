@@ -1,0 +1,51 @@
+@main(input: int) {
+  v1: int = const 1;
+  index: int = id v1;
+.for.cond.0:
+  v4: bool = lt index input;
+  br v4 .for.body.0 .for.end.0;
+.for.body.0:
+  v6: int = const 3;
+  v7: int = div index v6;
+  v9: int = const 3;
+  v10: int = mul v9 v7;
+  v12: bool = eq index v10;
+  isFizz: bool = id v12;
+  v14: int = const 5;
+  v15: int = div index v14;
+  v17: int = const 5;
+  v18: int = mul v17 v15;
+  v20: bool = eq index v18;
+  isBuzz: bool = id v20;
+  v22: bool = id isFizz;
+  br v22 .then.21 .else.21;
+.then.21:
+  v24: bool = id isBuzz;
+  br v24 .then.23 .else.23;
+.then.23:
+  v27: int = const -1;
+  print v27;
+  jmp .endif.23;
+.else.23:
+  v31: int = const -2;
+  print v31;
+.endif.23:
+  jmp .endif.21;
+.else.21:
+  v34: bool = id isBuzz;
+  br v34 .then.33 .else.33;
+.then.33:
+  v37: int = const -3;
+  print v37;
+  jmp .endif.33;
+.else.33:
+  v39: int = id index;
+  print v39;
+.endif.33:
+.endif.21:
+  v42: int = const 1;
+  v43: int = add index v42;
+  index: int = id v43;
+  jmp .for.cond.0;
+.for.end.0:
+}

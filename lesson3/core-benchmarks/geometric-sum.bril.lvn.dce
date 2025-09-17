@@ -1,0 +1,18 @@
+@main(a: int, r: int, n: int) {
+  one: int = const 1;
+  r_n: int = const 1;
+  i: int = const 0;
+.loop:
+  cond: bool = lt i n;
+  br cond .body .done;
+.body:
+  r_n: int = mul r_n r;
+  i: int = add i one;
+  jmp .loop;
+.done:
+  one_minus_r_n: int = sub one r_n;
+  numerator: int = mul one_minus_r_n a;
+  one_minus_r: int = sub one r;
+  sum: int = div numerator one_minus_r;
+  print sum;
+}

@@ -1,0 +1,38 @@
+# ARGS: 8
+@main(n: int) {
+  v1: int = id n;
+  v2: int = id n;
+  ans: int = call @count_path v1 v2;
+  v3: int = id ans;
+  print v3;
+}
+@count_path(x: int, y: int): int {
+  v2: int = const 0;
+  v3: bool = eq x v2;
+  br v3 .then.0 .else.0;
+.then.0:
+  v4: int = const 1;
+  ret v4;
+.else.0:
+  v7: int = const 0;
+  v8: bool = eq y v7;
+  br v8 .then.5 .else.5;
+.then.5:
+  v9: int = const 1;
+  ret v9;
+.else.5:
+  v11: int = const 1;
+  v12: int = sub x v11;
+  v13: int = id y;
+  v14: int = call @count_path v12 v13;
+  v15: int = id x;
+  v17: int = const 1;
+  v18: int = sub y v17;
+  v19: int = call @count_path v15 v18;
+  v20: int = add v14 v19;
+  v23: int = id v12;
+  v26: int = id v18;
+  v27: int = call @count_path v23 v26;
+  v28: int = add v20 v27;
+  ret v28;
+}
