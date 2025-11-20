@@ -52,6 +52,12 @@ Dynamic Instr Ratio (GM traced/orig): 1.066x
 Wrote results to lesson12_results.json
 ```
 
+### Dynamic Ratio Plot
+
+![Dynamic instruction ratios (traced/orig)](./trace_dyn.png)
+
+The bar chart (generated with `--plot --png trace_dyn.png`) visualizes per-program dynamic instruction ratios; bars above 1.0 indicate added speculative overhead or frequent aborts, below 1.0 indicate net savings from the fast path.
+
 ## Results JSON Fields
 
 - `verdict` (`Good!` or BAD categories)  | `static_orig` / `static_traced`  | `dyn_orig` / `dyn_traced` | outputs for strict comparison.
